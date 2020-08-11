@@ -8,6 +8,19 @@
   package: name={{ item }} state=present
   with_items: "{{ vars['packages_' + ansible_os_family] }}"
   register: mysql_result
+  
+- name: Update MySQL root password for all root accounts 
+  mysql_user:
+    name: root
+    host: "{{ item }}"
+    password: "admin123"
+    state: present
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+  
 - name: Remove localhost binding
   vars:
     os_major_version: "{{ '_16' if ansible_os_family == 'Debian' and ansible_distribution_major_version == '16' else '' }}"

@@ -8,6 +8,15 @@
   package: name={{ item }} state=present
   with_items: "{{ vars['packages_' + ansible_os_family] }}"
   register: mysql_result
+  
+- name: Remove localhost binding
+  vars:
+    os_major_version: "{{ '_16' if ansible_os_family == 'Debian' and ansible_distribution_major_version == '16' else '' }}"
+    mysqlpath_Suse: /etc/my.cnf
+    mysqlpath_RedHat: /etc/my.cnf
+    mysqlpath_Debian: /etc/mysql/my.cnf
+    mysqlpath_Debian_16: /etc/mysql/mysql.conf.d/mysqld.cnf
+  lineinfile: dest={{ vars['mysqlpath_' + ansible_os_family + os_major_version] }} regexp="^bind-address" state=absent
 
 - name: Ensure mysql is running and starts on boot
   service:

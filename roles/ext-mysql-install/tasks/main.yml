@@ -8,27 +8,39 @@
   package: name={{ item }} state=present
   with_items: "{{ vars['packages_' + ansible_os_family] }}"
   register: mysql_result
-  
-- name: Update MySQL root password for all root accounts 
+
+- name: Ensure mysql is running and starts on boot
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+  become: yes
+
+- name: Create `/root/.my.cnf`  with root password credentials
+  template:
+    src:  my.cnf.j2
+    dest: /root/.my.cnf
+    owner: root
+    mode: 0600
+  become: yes
+  register: mysql_result
+
+- name: Ensure mysql root password is updated for all root accounts
   mysql_user:
     name: root
     host: "{{ item }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
     password: "admin123"
-    state: present
-  with_items:
+    priv: '*.*:ALL,GRANT'
+    check_implicit_admin: true
+  loop:
     - "{{ ansible_hostname }}"
     - 127.0.0.1
     - ::1
     - localhost
-  
-- name: Remove localhost binding
-  vars:
-    os_major_version: "{{ '_16' if ansible_os_family == 'Debian' and ansible_distribution_major_version == '16' else '' }}"
-    mysqlpath_Suse: /etc/my.cnf
-    mysqlpath_RedHat: /etc/my.cnf
-    mysqlpath_Debian: /etc/mysql/my.cnf
-    mysqlpath_Debian_16: /etc/mysql/mysql.conf.d/mysqld.cnf
-  lineinfile: dest={{ vars['mysqlpath_' + ansible_os_family + os_major_version] }} regexp="^bind-address" state=absent
+  become: yes
+  register: mysql_result
+
 
 - name: Start the mysqld service
   vars:
@@ -37,4 +49,3 @@
     service_Debian: mysql
   service: name={{ vars['service_' + ansible_os_family] }} state=restarted enabled=yes
   when: mysql_result.changed
-

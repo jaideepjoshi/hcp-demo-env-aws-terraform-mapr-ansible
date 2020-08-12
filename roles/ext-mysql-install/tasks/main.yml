@@ -16,7 +16,8 @@
     mysqlpath_RedHat: /etc/my.cnf
     mysqlpath_Debian: /etc/mysql/my.cnf
     mysqlpath_Debian_16: /etc/mysql/mysql.conf.d/mysqld.cnf
-  lineinfile: dest={{ vars['mysqlpath_' + ansible_os_family + os_major_version] }} regexp="^bind-address" state=absent
+  #lineinfile: dest={{ vars['mysqlpath_' + ansible_os_family + os_major_version] }} regexp="^bind-address" state=absent
+  lineinfile: dest=/etc/mysql/mysql.conf.d/mysqld.cnf regexp="^bind-address" state=absent
   register: mysql_result
 
 - name: Ensure mysql is running and starts on boot

@@ -144,8 +144,8 @@ node2
 
 # Hive Server2
 [mapr-hive-server2]
-node1
-node2
+#node1
+#node2
 
 # Hive WebHCat
 [mapr-hive-webhcat]

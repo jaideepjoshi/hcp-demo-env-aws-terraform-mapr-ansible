@@ -108,9 +108,9 @@ node3
 
 # Apache Drill
 [mapr-drill-standalone]
-node1
-node2
-node3
+#node1
+#node2
+#node3
 
 # Apache Drill
 [mapr-drill-yarn]

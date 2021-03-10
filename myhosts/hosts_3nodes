@@ -88,7 +88,7 @@ node3
 
 # Spark HistoryServer
 [mapr-spark-historyserver]
-node2
+#node2
 
 # NFS
 [mapr-nfs-v3]

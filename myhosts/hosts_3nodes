@@ -167,7 +167,7 @@ node2
 
 # Sqoop2 Server
 [mapr-sqoop2-server]
-node2
+#node2
 
 # Sqoop2 Client
 [mapr-sqoop2-client]

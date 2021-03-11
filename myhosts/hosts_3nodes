@@ -40,9 +40,9 @@ node3
 
 # Kafka API for MapR-Streams
 [mapr-kafka]
-node1
-node2
-node3
+#node1
+#node2
+#node3
 
 # Gateway for Streams and MapR-DB
 [mapr-gateway]
@@ -59,18 +59,18 @@ node1
 
 # YARN resource manager
 [mapr-resourcemanager]
-node2
-node3
+#node2
+#node3
 
 # Contains YARN Node Manager
 [mapr-nodemanager]
-node1
-node2
-node3
+#node1
+#node2
+vnode3
 
 # Job History Server, IMPORTANT: only one
 [mapr-historyserver]
-node3
+#node3
 
 # MySQL, required for Hive MetaStore and Oozie, IMPORTANT: only one
 [ext-mysql]
@@ -78,9 +78,9 @@ node1
 
 # Spark on YARN
 [mapr-spark-yarn]
-node1
-node2
-node3
+#node1
+#node2
+#node3
 
 # Spark ThriftServer
 [mapr-spark-thriftserver]
@@ -123,9 +123,9 @@ node3
 
 # HBase CLI
 [mapr-hbase-cli]
-node1
-node2
-node3
+#node1
+#node2
+#node3
 
 # HBase REST and Thrift
 [mapr-hbase-thrift-rest]
@@ -133,14 +133,14 @@ node3
 
 # Hive CLI
 [mapr-hive-cli]
-node1
-node2
-node3
+#node1
+#node2
+#node3
 
 # Hive Meta Store
 [mapr-hive-metastore]
-node1
-node2
+#node1
+#node2
 
 # Hive Server2
 [mapr-hive-server2]

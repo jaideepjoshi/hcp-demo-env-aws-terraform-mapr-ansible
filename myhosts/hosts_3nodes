@@ -92,9 +92,7 @@ node2
 
 # NFS
 [mapr-nfs-v3]
-#node1
-#node2
-#node3
+node1
 
 # MapR Fuse Posix Client Basic
 [mapr-posix-client-basic]
@@ -243,5 +241,4 @@ node2
 [mapr-kibana]
 #node3
 
-
-
+# Object
